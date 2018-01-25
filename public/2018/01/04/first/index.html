@@ -6,24 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>技术手法健身房 | On The Road</title>
+  <title>vue复杂组件的思考 | On The Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是第一篇文章啊哈哈哈哈哈哈哈哈哈哈哈">
+  <meta name="description" content="待续">
 <meta property="og:type" content="article">
-<meta property="og:title" content="技术手法健身房">
+<meta property="og:title" content="vue复杂组件的思考">
 <meta property="og:url" content="http://yoursite.com/2018/01/04/first/index.html">
 <meta property="og:site_name" content="On The Road">
-<meta property="og:description" content="这是第一篇文章啊哈哈哈哈哈哈哈哈哈哈哈">
+<meta property="og:description" content="待续">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-04T08:27:40.593Z">
+<meta property="og:updated_time" content="2018-01-25T15:34:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="技术手法健身房">
-<meta name="twitter:description" content="这是第一篇文章啊哈哈哈哈哈哈哈哈哈哈哈">
+<meta name="twitter:title" content="vue复杂组件的思考">
+<meta name="twitter:description" content="待续">
   
     <link rel="alternative" href="/atom.xml" title="On The Road" type="application/atom+xml">
   
   
-    <link rel="icon" href="/faviocn.ico">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -47,7 +47,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="http://evanstang.cn/image/header.png" class="js-avatar">
+			<img src="https://tanggaozeng.github.io/image/header.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Evans Tang</a></h1>
@@ -61,7 +61,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/tags/anyTime-note/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -83,13 +83,13 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+					<a class="github" target="_blank" href="https://github.com/TangGaozeng" title="github"><i class="icon-github"></i></a>
 		        
 					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
 		        
 					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
 		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Evans-Tang/activities" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
 			</div>
 		</nav>
@@ -107,7 +107,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="http://evanstang.cn/image/header.png" class="js-avatar">
+				<img src="https://tanggaozeng.github.io/image/header.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Evans Tang</h1>
@@ -126,13 +126,13 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="https://github.com/TangGaozeng" title="github"><i class="icon-github"></i></a>
 			        
 						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
 			        
 						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
 			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Evans-Tang/activities" title="zhihu"><i class="icon-zhihu"></i></a>
 			        
 				</div>
 			</nav>
@@ -143,7 +143,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/anyTime-note/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -165,43 +165,25 @@
         
   
     <h1 class="article-title" itemprop="name">
-      技术手法健身房
+      vue复杂组件的思考
     </h1>
   
 
         
         <a href="/2018/01/04/first/" class="archive-article-date">
-  	<time datetime="2018-01-04T08:27:40.593Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
+  	<time datetime="2018-01-04T07:17:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="这是第一篇文章"><a href="#这是第一篇文章" class="headerlink" title="这是第一篇文章"></a>这是第一篇文章</h3><h4 id="啊哈哈哈哈哈哈哈哈哈哈哈"><a href="#啊哈哈哈哈哈哈哈哈哈哈哈" class="headerlink" title="啊哈哈哈哈哈哈哈哈哈哈哈"></a>啊哈哈哈哈哈哈哈哈哈哈哈</h4>
-      
+        <blockquote>
+<p>待续</p>
+</blockquote>
 
       
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
+
       
     </div>
     <div class="article-info article-info-index">
@@ -271,7 +253,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/01/15/2017conclusion/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/01/04/2017conclusion/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -451,27 +433,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+              <a href="hhttps://ncumovi.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>movi</a>
             </li>
           
         </ul>
@@ -482,7 +444,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自湖南永州的小伙子&lt;br&gt;遨游在前端的大世界</div>
   	  	
     	</section>
     
