@@ -19,7 +19,7 @@
     <link rel="alternative" href="/atom.xml" title="On The Road" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/faviocn.ico">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -43,7 +43,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="https://tanggaozeng.github.io/image/header.png" class="js-avatar">
+			<img src="http://evanstang.cn/image/header.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Evans Tang</a></h1>
@@ -57,7 +57,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/anyTime-note/">随笔</a></li>
+				<li><a href="/tags/随笔/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -103,7 +103,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="https://tanggaozeng.github.io/image/header.png" class="js-avatar">
+				<img src="http://evanstang.cn/image/header.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Evans Tang</h1>
@@ -139,7 +139,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/anyTime-note/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -156,6 +156,132 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Jsbridge" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/18/Jsbridge/">前端与appNative的交互 jsbridge</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/18/Jsbridge/" class="archive-article-date">
+  	<time datetime="2018-04-18T01:36:13.309Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><blockquote>
+<p>目前前端实现app的方式有很多，facebook的react Native 、阿里的weex(vue),但是相比原生还是存在很多问题，比如加载速度、调硬件设备、体验等方面。于是就有了中庸的一种实现方式 混合开发，用原生的壳内嵌H5页面，最近公司就有了这样一个项目，把之前写的公众号的项目内嵌进app。并且要保留之前的微信支付，添加直接拨打电话、分享朋友圈等功能，这就需要前端调用原生的方法，同时原生也会调用前端的方法。本文的重点就来了”jsbridge”，它就相当于前端与原生的一个中间连接桥。</p>
+</blockquote>
+<h3 id="jsbridge-实现方式"><a href="#jsbridge-实现方式" class="headerlink" title="jsbridge 实现方式"></a>jsbridge 实现方式</h3><blockquote>
+<h4 id="目前主要有三种实现方式，-js的WebViewJavascriptBridge方法、api注入、URL-SCHEME。"><a href="#目前主要有三种实现方式，-js的WebViewJavascriptBridge方法、api注入、URL-SCHEME。" class="headerlink" title="目前主要有三种实现方式， js的WebViewJavascriptBridge方法、api注入、URL SCHEME。"></a>目前主要有三种实现方式， js的WebViewJavascriptBridge方法、api注入、URL SCHEME。</h4><p>1.WebViewJavascriptBridge</p>
+</blockquote>
+<p> 原生引入WebViewJavascriptBridge的库，前端代码主要如下</p>
+<pre><code>//注册事件监听，初始化
+const setupWebViewJavascriptBridge = (callback) =&gt; {
+  let userAgent = navigator.userAgent
+  let isAndroid = userAgent.indexOf(&apos;Android&apos;) &gt; -1 || userAgent.indexOf(&apos;Adr&apos;) &gt; -1
+  let isIOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+
+  // Android使用
+  if (isAndroid) {
+    if (window.WebViewJavascriptBridge) {
+      // eslint-disable-next-line
+      callback(WebViewJavascriptBridge)
+    } else {
+      document.addEventListener(
+        &apos;WebViewJavascriptBridgeReady&apos;,
+        function () {
+          // eslint-disable-next-line
+          callback(WebViewJavascriptBridge)
+        },
+        false
+      )
+    }
+  }
+
+  // iOS使用
+  if (isIOS) {
+    if (window.WebViewJavascriptBridge) {
+      // eslint-disable-next-line
+      return callback(WebViewJavascriptBridge)
+    }
+    if (window.WVJBCallbacks) {
+      return window.WVJBCallbacks.push(callback)
+    }
+    window.WVJBCallbacks = [callback]
+    var WVJBIframe = document.createElement(&apos;iframe&apos;)
+    WVJBIframe.style.display = &apos;none&apos;
+    WVJBIframe.src = &apos;https://__bridge_loaded__&apos;
+    document.documentElement.appendChild(WVJBIframe)
+    setTimeout(function () {
+      document.documentElement.removeChild(WVJBIframe)
+    }, 0)
+  }
+}
+// 分享
+export const share = (platform, url, title) =&gt; {
+  setupWebViewJavascriptBridge((bridge) =&gt; {
+
+      //window.WebViewJavascriptBridge
+
+    bridge.callHandler(&apos;appBridgeShareToWechat&apos;, JSON.stringify({platform: platform, url: url, title: title}), (response) =&gt; {
+      // let repObj = JSON.parse(response)
+      // if (repObj.success) {
+      //   tips(&apos;分享成功&apos;, 1000)
+      // }
+    })
+  })
+}
+</code></pre>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/18/Jsbridge/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2017conclusion" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -163,13 +289,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/04/2017conclusion/">2017年的总结</a>
+      <a class="article-title" href="/2018/01/15/2017conclusion/">2017年的总结</a>
     </h1>
   
 
         
-        <a href="/2018/01/04/2017conclusion/" class="archive-article-date">
-  	<time datetime="2018-01-04T14:34:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
+        <a href="/2018/01/15/2017conclusion/" class="archive-article-date">
+  	<time datetime="2018-01-15T07:38:31.042Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-15</time>
 </a>
         
       </header>
@@ -183,7 +309,7 @@
 <p>2017年一直都在微叮科技公司，自从2016年开始开始使用vue技术栈，2017也是一直继续加强使用vue。并且实现了所有项目的前后端分离，这很有意思，在我看来这是前端崛起的一个里程碑。我能算也是勉强赶上了技术潮流，整个公司的系统都是使用vue + iview实现整个前端的展示页面和交互，唯一小瑕疵的是没有使用上vue-route 和 vux，路由有后端控制，整个项目因为庞大也没有采取单页面应用的开发，而是采取了比较保守做法，事实证明这也是对的，项目庞大、权限复杂，前端实现的话是比较蛋疼的，而且体验也不会太好。<br> 公司项目比较多，但2017年我做的工作如下，安阳项目（微信公众页面，只兼容微信内置浏览器） 、分销项目（分销系统，几乎大部分时间都在开发整个）、管理项目（在公司的试用项目经理阶段管理了一个月），这么统计下来所做的东西也不多。对vue框架的使用也是越来越娴熟，也真正的了解到了mvvm框架的好处，组件式的开发、数据驱动页面。同时对前端的工程化也有了一定的了解，webpack不敢说精通，但也能熟练的搭建起整个框架。</p>
 </blockquote>
 <h3 id="成长方面"><a href="#成长方面" class="headerlink" title="成长方面"></a>成长方面</h3><blockquote>
-<p>2017年始给自己定的一系列目标，到目前为止还是很尴尬的，原生js跨步不大，一直在计划内的后端语言也没有大的进展，node.js、python没有深入的学习，Vue方面使倒是有了很大的进步。回看第一个vue项目简直没法入眼。总的来说成长缓慢，技术恐慌严重。</p>
+<p>2017年始给自己定的一系列目标，到目前为止还是很尴尬的，原生js跨步不大，一直在计划内的后端语言也没有大的进展，node.js、python没有深入的学习，Vue方面使倒是有了很大的进步。回看第一个vue项目简直没法入眼。总的来说成长缓慢，技术积累不够。</p>
 </blockquote>
 <h3 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h3><blockquote>
 <p>未来的当前路就是2018，2018坚持完全掌握一门后台语言（能完成项目），前端工程化的加强（独立配置、新的工具掌握如Parcel等）、原生js的代码的整洁与优雅（代码之道）、培养自己的第二技能（经济、写作、管理等）。</p>
@@ -200,7 +326,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/04/2017conclusion/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/01/15/2017conclusion/">展开全文 >></a>
         </p>
       
 
@@ -243,7 +369,7 @@
 
         
         <a href="/2018/01/04/first/" class="archive-article-date">
-  	<time datetime="2018-01-04T07:17:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
+  	<time datetime="2018-01-04T08:27:40.593Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
 </a>
         
       </header>
@@ -436,7 +562,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="hhttps://ncumovi.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>movi</a>
+              <a href="http://ncumovi.github.io" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Movi blog</a>
             </li>
           
         </ul>
@@ -447,7 +573,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自湖南永州的小伙子&lt;br&gt;遨游在前端的大世界</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自于湖南永州的小伙子&lt;br&gt;遨游在前端大世界的小白</div>
   	  	
     	</section>
     
