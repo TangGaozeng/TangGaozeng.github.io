@@ -19,7 +19,7 @@
     <link rel="alternative" href="/atom.xml" title="On The Road" type="application/atom+xml">
   
   
-    <link rel="icon" href="/faviocn.ico">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -43,7 +43,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="http://evanstang.cn/image/header.png" class="js-avatar">
+			<img src="https://tanggaozeng.github.io/image/header.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Evans Tang</a></h1>
@@ -57,7 +57,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/tags/anyTime-note/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -103,7 +103,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="http://evanstang.cn/image/header.png" class="js-avatar">
+				<img src="https://tanggaozeng.github.io/image/header.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Evans Tang</h1>
@@ -139,7 +139,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/anyTime-note/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -156,6 +156,150 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-newStart" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/27/newStart/">关于vue单页面应用的动态菜单和角色权限的实践</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/27/newStart/" class="archive-article-date">
+  	<time datetime="2019-08-27T14:39:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>新接手一个vue后台项目，技术栈使用vue全家桶，因每个角色登录的菜单和权限各不一样。经过方案调研决定后台返回菜单和权限数据来显示，具体思路就是 每一个登录的用户生成一个token,添加到axios请求头，再请求菜单和权限接口。前端组装菜单数组进行渲染。</p>
+</blockquote>
+<h3 id="addRouters方法动态添加路由"><a href="#addRouters方法动态添加路由" class="headerlink" title="addRouters方法动态添加路由"></a>addRouters方法动态添加路由</h3><p><code>this.$router.addRoutes(&#39;已组装好的路由&#39;) 同时存到sessionStorage</code></p>
+<blockquote>
+<p>用户权限 通过后台返回的权限表 添加一个自定义方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Vue.directive(&apos;has&apos;, &#123;</div><div class="line"> bind: function (el,val)&#123;</div><div class="line">  if (!Vue.prototype.$_has(val)) &#123;</div><div class="line">   el.parentNode.removeChild(el);</div><div class="line">  &#125;</div><div class="line"> &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 权限检查方法</div><div class="line">Vue.prototype.$_has = function (value) &#123;</div><div class="line"> let isExist = false;</div><div class="line"> let btnPermissionsStr = sessionStorage.getItem(&quot;permissions&quot;);</div><div class="line"> if (btnPermissionsStr == undefined || btnPermissionsStr == null) &#123;</div><div class="line">  return false;</div><div class="line"> &#125;</div><div class="line"> if (value.includes(btnPermissionsStr)) &#123;</div><div class="line">  isExist = true;</div><div class="line"> &#125;</div><div class="line"> return isExist;</div><div class="line">&#125;;</div><div class="line">&lt;button v-has=&quot;&apos;edit&apos;&quot;&gt;编辑&lt;/button&gt;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/27/newStart/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2017conclusion" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/18/2017conclusion/">2017年的总结</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/18/2017conclusion/" class="archive-article-date">
+  	<time datetime="2018-04-18T13:02:11.170Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="给自己一点信心"><a href="#给自己一点信心" class="headerlink" title="给自己一点信心"></a>给自己一点信心</h3><blockquote>
+<p>一直在回想自己2017年所经历的一些事，准备写一个年终总结，但文笔有限，一直没有想好怎么写，一拖就拖到了现在，但博客弄好都挺久了，都没有一篇文章也挺不好意思的，今天用自己的烂文笔献丑了。</p>
+</blockquote>
+<h3 id="工作方面"><a href="#工作方面" class="headerlink" title="工作方面"></a>工作方面</h3><blockquote>
+<p>2017年一直都在微叮科技公司，自从2016年开始开始使用vue技术栈，2017也是一直继续加强使用vue。并且实现了所有项目的前后端分离，这很有意思，在我看来这是前端崛起的一个里程碑。我能算也是勉强赶上了技术潮流，整个公司的系统都是使用vue + iview实现整个前端的展示页面和交互，唯一小瑕疵的是没有使用上vue-route 和 vux，路由有后端控制，整个项目因为庞大也没有采取单页面应用的开发，而是采取了比较保守做法，事实证明这也是对的，项目庞大、权限复杂，前端实现的话是比较蛋疼的，而且体验也不会太好。<br> 公司项目比较多，但2017年我做的工作如下，安阳项目（微信公众页面，只兼容微信内置浏览器） 、分销项目（分销系统，几乎大部分时间都在开发整个）、管理项目（在公司的试用项目经理阶段管理了一个月），这么统计下来所做的东西也不多。对vue框架的使用也是越来越娴熟，也真正的了解到了mvvm框架的好处，组件式的开发、数据驱动页面。同时对前端的工程化也有了一定的了解，webpack不敢说精通，但也能熟练的搭建起整个框架。</p>
+</blockquote>
+<h3 id="成长方面"><a href="#成长方面" class="headerlink" title="成长方面"></a>成长方面</h3><blockquote>
+<p>2017年始给自己定的一系列目标，到目前为止还是很尴尬的，原生js跨步不大，一直在计划内的后端语言也没有大的进展，node.js、python没有深入的学习，Vue方面使倒是有了很大的进步。回看第一个vue项目简直没法入眼。总的来说成长缓慢，技术积累不够。</p>
+</blockquote>
+<h3 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h3><blockquote>
+<p>未来的当前路就是2018，2018坚持完全掌握一门后台语言（能完成项目），前端工程化的加强（独立配置、新的工具掌握如Parcel等）、原生js的代码的整洁与优雅（代码之道）、培养自己的第二技能（经济、写作、管理等）。</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/18/2017conclusion/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Jsbridge" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -169,7 +313,7 @@
 
         
         <a href="/2018/04/18/Jsbridge/" class="archive-article-date">
-  	<time datetime="2018-04-18T01:36:13.309Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-18</time>
+  	<time datetime="2018-04-18T13:02:11.170Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-18</time>
 </a>
         
       </header>
@@ -241,6 +385,8 @@ export const share = (platform, url, title) =&gt; {
 }
 </code></pre>
         
+          <a class="article-more-a" href="/2018/04/18/Jsbridge/#more">more >></a>
+        
       
 
       
@@ -253,80 +399,6 @@ export const share = (platform, url, title) =&gt; {
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/04/18/Jsbridge/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2017conclusion" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/15/2017conclusion/">2017年的总结</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/15/2017conclusion/" class="archive-article-date">
-  	<time datetime="2018-01-15T07:38:31.042Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="给自己一点信心"><a href="#给自己一点信心" class="headerlink" title="给自己一点信心"></a>给自己一点信心</h3><blockquote>
-<p>一直在回想自己2017年所经历的一些事，准备写一个年终总结，但文笔有限，一直没有想好怎么写，一拖就拖到了现在，但博客弄好都挺久了，都没有一篇文章也挺不好意思的，今天用自己的烂文笔献丑了。</p>
-</blockquote>
-<h3 id="工作方面"><a href="#工作方面" class="headerlink" title="工作方面"></a>工作方面</h3><blockquote>
-<p>2017年一直都在微叮科技公司，自从2016年开始开始使用vue技术栈，2017也是一直继续加强使用vue。并且实现了所有项目的前后端分离，这很有意思，在我看来这是前端崛起的一个里程碑。我能算也是勉强赶上了技术潮流，整个公司的系统都是使用vue + iview实现整个前端的展示页面和交互，唯一小瑕疵的是没有使用上vue-route 和 vux，路由有后端控制，整个项目因为庞大也没有采取单页面应用的开发，而是采取了比较保守做法，事实证明这也是对的，项目庞大、权限复杂，前端实现的话是比较蛋疼的，而且体验也不会太好。<br> 公司项目比较多，但2017年我做的工作如下，安阳项目（微信公众页面，只兼容微信内置浏览器） 、分销项目（分销系统，几乎大部分时间都在开发整个）、管理项目（在公司的试用项目经理阶段管理了一个月），这么统计下来所做的东西也不多。对vue框架的使用也是越来越娴熟，也真正的了解到了mvvm框架的好处，组件式的开发、数据驱动页面。同时对前端的工程化也有了一定的了解，webpack不敢说精通，但也能熟练的搭建起整个框架。</p>
-</blockquote>
-<h3 id="成长方面"><a href="#成长方面" class="headerlink" title="成长方面"></a>成长方面</h3><blockquote>
-<p>2017年始给自己定的一系列目标，到目前为止还是很尴尬的，原生js跨步不大，一直在计划内的后端语言也没有大的进展，node.js、python没有深入的学习，Vue方面使倒是有了很大的进步。回看第一个vue项目简直没法入眼。总的来说成长缓慢，技术积累不够。</p>
-</blockquote>
-<h3 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h3><blockquote>
-<p>未来的当前路就是2018，2018坚持完全掌握一门后台语言（能完成项目），前端工程化的加强（独立配置、新的工具掌握如Parcel等）、原生js的代码的整洁与优雅（代码之道）、培养自己的第二技能（经济、写作、管理等）。</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/15/2017conclusion/">展开全文 >></a>
         </p>
       
 
@@ -369,7 +441,7 @@ export const share = (platform, url, title) =&gt; {
 
         
         <a href="/2018/01/04/first/" class="archive-article-date">
-  	<time datetime="2018-01-04T08:27:40.593Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
+  	<time datetime="2018-01-04T07:17:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
 </a>
         
       </header>
@@ -431,7 +503,7 @@ export const share = (platform, url, title) =&gt; {
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Evans Tang
+    		&copy; 2019 Evans Tang
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -562,7 +634,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://ncumovi.github.io" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Movi blog</a>
+              <a href="https://ncumovi.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>movi</a>
             </li>
           
         </ul>
@@ -573,7 +645,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自于湖南永州的小伙子&lt;br&gt;遨游在前端大世界的小白</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自湖南永州的小伙子&lt;br&gt;遨游在前端的大世界</div>
   	  	
     	</section>
     
