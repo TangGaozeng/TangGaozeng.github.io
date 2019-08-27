@@ -156,6 +156,76 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-newStart" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/27/newStart/">关于vue单页面应用的动态菜单和角色权限的实践</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/27/newStart/" class="archive-article-date">
+  	<time datetime="2019-08-27T14:39:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>新接手一个vue后台项目，技术栈使用vue全家桶，因每个角色登录的菜单和权限各不一样。经过方案调研决定后台返回菜单和权限数据来显示，具体思路就是 每一个登录的用户生成一个token,添加到axios请求头，再请求菜单和权限接口。前端组装菜单数组进行渲染。</p>
+</blockquote>
+<h3 id="addRouters方法动态添加路由"><a href="#addRouters方法动态添加路由" class="headerlink" title="addRouters方法动态添加路由"></a>addRouters方法动态添加路由</h3><p><code>this.$router.addRoutes(&#39;已组装好的路由&#39;) 同时存到sessionStorage</code></p>
+<blockquote>
+<p>用户权限 通过后台返回的权限表 添加一个自定义方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Vue.directive(&apos;has&apos;, &#123;</div><div class="line"> bind: function (el,val)&#123;</div><div class="line">  if (!Vue.prototype.$_has(val)) &#123;</div><div class="line">   el.parentNode.removeChild(el);</div><div class="line">  &#125;</div><div class="line"> &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 权限检查方法</div><div class="line">Vue.prototype.$_has = function (value) &#123;</div><div class="line"> let isExist = false;</div><div class="line"> let btnPermissionsStr = sessionStorage.getItem(&quot;permissions&quot;);</div><div class="line"> if (btnPermissionsStr == undefined || btnPermissionsStr == null) &#123;</div><div class="line">  return false;</div><div class="line"> &#125;</div><div class="line"> if (value.includes(btnPermissionsStr)) &#123;</div><div class="line">  isExist = true;</div><div class="line"> &#125;</div><div class="line"> return isExist;</div><div class="line">&#125;;</div><div class="line">&lt;button v-has=&quot;&apos;edit&apos;&quot;&gt;编辑&lt;/button&gt;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/27/newStart/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2017conclusion" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -163,13 +233,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/04/2017conclusion/">2017年的总结</a>
+      <a class="article-title" href="/2018/04/18/2017conclusion/">2017年的总结</a>
     </h1>
   
 
         
-        <a href="/2018/01/04/2017conclusion/" class="archive-article-date">
-  	<time datetime="2018-01-04T14:34:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
+        <a href="/2018/04/18/2017conclusion/" class="archive-article-date">
+  	<time datetime="2018-04-18T13:02:11.170Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-18</time>
 </a>
         
       </header>
@@ -200,7 +270,135 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/04/2017conclusion/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/18/2017conclusion/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Jsbridge" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/18/Jsbridge/">前端与appNative的交互 jsbridge</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/18/Jsbridge/" class="archive-article-date">
+  	<time datetime="2018-04-18T13:02:11.170Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><blockquote>
+<p>目前前端实现app的方式有很多，facebook的react Native 、阿里的weex(vue),但是相比原生还是存在很多问题，比如加载速度、调硬件设备、体验等方面。于是就有了中庸的一种实现方式 混合开发，用原生的壳内嵌H5页面，最近公司就有了这样一个项目，把之前写的公众号的项目内嵌进app。并且要保留之前的微信支付，添加直接拨打电话、分享朋友圈等功能，这就需要前端调用原生的方法，同时原生也会调用前端的方法。本文的重点就来了”jsbridge”，它就相当于前端与原生的一个中间连接桥。</p>
+</blockquote>
+<h3 id="jsbridge-实现方式"><a href="#jsbridge-实现方式" class="headerlink" title="jsbridge 实现方式"></a>jsbridge 实现方式</h3><blockquote>
+<h4 id="目前主要有三种实现方式，-js的WebViewJavascriptBridge方法、api注入、URL-SCHEME。"><a href="#目前主要有三种实现方式，-js的WebViewJavascriptBridge方法、api注入、URL-SCHEME。" class="headerlink" title="目前主要有三种实现方式， js的WebViewJavascriptBridge方法、api注入、URL SCHEME。"></a>目前主要有三种实现方式， js的WebViewJavascriptBridge方法、api注入、URL SCHEME。</h4><p>1.WebViewJavascriptBridge</p>
+</blockquote>
+<p> 原生引入WebViewJavascriptBridge的库，前端代码主要如下</p>
+<pre><code>//注册事件监听，初始化
+const setupWebViewJavascriptBridge = (callback) =&gt; {
+  let userAgent = navigator.userAgent
+  let isAndroid = userAgent.indexOf(&apos;Android&apos;) &gt; -1 || userAgent.indexOf(&apos;Adr&apos;) &gt; -1
+  let isIOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+
+  // Android使用
+  if (isAndroid) {
+    if (window.WebViewJavascriptBridge) {
+      // eslint-disable-next-line
+      callback(WebViewJavascriptBridge)
+    } else {
+      document.addEventListener(
+        &apos;WebViewJavascriptBridgeReady&apos;,
+        function () {
+          // eslint-disable-next-line
+          callback(WebViewJavascriptBridge)
+        },
+        false
+      )
+    }
+  }
+
+  // iOS使用
+  if (isIOS) {
+    if (window.WebViewJavascriptBridge) {
+      // eslint-disable-next-line
+      return callback(WebViewJavascriptBridge)
+    }
+    if (window.WVJBCallbacks) {
+      return window.WVJBCallbacks.push(callback)
+    }
+    window.WVJBCallbacks = [callback]
+    var WVJBIframe = document.createElement(&apos;iframe&apos;)
+    WVJBIframe.style.display = &apos;none&apos;
+    WVJBIframe.src = &apos;https://__bridge_loaded__&apos;
+    document.documentElement.appendChild(WVJBIframe)
+    setTimeout(function () {
+      document.documentElement.removeChild(WVJBIframe)
+    }, 0)
+  }
+}
+// 分享
+export const share = (platform, url, title) =&gt; {
+  setupWebViewJavascriptBridge((bridge) =&gt; {
+
+      //window.WebViewJavascriptBridge
+
+    bridge.callHandler(&apos;appBridgeShareToWechat&apos;, JSON.stringify({platform: platform, url: url, title: title}), (response) =&gt; {
+      // let repObj = JSON.parse(response)
+      // if (repObj.success) {
+      //   tips(&apos;分享成功&apos;, 1000)
+      // }
+    })
+  })
+}
+</code></pre>
+        
+          <a class="article-more-a" href="/2018/04/18/Jsbridge/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/18/Jsbridge/">展开全文 >></a>
         </p>
       
 
@@ -305,7 +503,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Evans Tang
+    		&copy; 2019 Evans Tang
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

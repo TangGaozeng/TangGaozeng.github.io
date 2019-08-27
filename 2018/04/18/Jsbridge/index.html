@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>2017年的总结 | On The Road</title>
+  <title>前端与appNative的交互 jsbridge | On The Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给自己一点信心 一直在回想自己2017年所经历的一些事，准备写一个年终总结，但文笔有限，一直没有想好怎么写，一拖就拖到了现在，但博客弄好都挺久了，都没有一篇文章也挺不好意思的，今天用自己的烂文笔献丑了。  工作方面 2017年一直都在微叮科技公司，自从2016年开始开始使用vue技术栈，2017也是一直继续加强使用vue。并且实现了所有项目的前后端分离，这很有意思，在我看来这是前端崛起的一个里程碑">
-<meta property="og:type" content="website">
-<meta property="og:title" content="2017年的总结">
-<meta property="og:url" content="http://yoursite.com/tags/anyTime-note.html">
+  <meta name="description" content="背景 目前前端实现app的方式有很多，facebook的react Native 、阿里的weex(vue),但是相比原生还是存在很多问题，比如加载速度、调硬件设备、体验等方面。于是就有了中庸的一种实现方式 混合开发，用原生的壳内嵌H5页面，最近公司就有了这样一个项目，把之前写的公众号的项目内嵌进app。并且要保留之前的微信支付，添加直接拨打电话、分享朋友圈等功能，这就需要前端调用原生的方法，同时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端与appNative的交互 jsbridge">
+<meta property="og:url" content="http://yoursite.com/2018/04/18/Jsbridge/index.html">
 <meta property="og:site_name" content="On The Road">
-<meta property="og:description" content="给自己一点信心 一直在回想自己2017年所经历的一些事，准备写一个年终总结，但文笔有限，一直没有想好怎么写，一拖就拖到了现在，但博客弄好都挺久了，都没有一篇文章也挺不好意思的，今天用自己的烂文笔献丑了。  工作方面 2017年一直都在微叮科技公司，自从2016年开始开始使用vue技术栈，2017也是一直继续加强使用vue。并且实现了所有项目的前后端分离，这很有意思，在我看来这是前端崛起的一个里程碑">
+<meta property="og:description" content="背景 目前前端实现app的方式有很多，facebook的react Native 、阿里的weex(vue),但是相比原生还是存在很多问题，比如加载速度、调硬件设备、体验等方面。于是就有了中庸的一种实现方式 混合开发，用原生的壳内嵌H5页面，最近公司就有了这样一个项目，把之前写的公众号的项目内嵌进app。并且要保留之前的微信支付，添加直接拨打电话、分享朋友圈等功能，这就需要前端调用原生的方法，同时">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-25T15:29:54.000Z">
+<meta property="og:updated_time" content="2018-04-18T13:02:11.170Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2017年的总结">
-<meta name="twitter:description" content="给自己一点信心 一直在回想自己2017年所经历的一些事，准备写一个年终总结，但文笔有限，一直没有想好怎么写，一拖就拖到了现在，但博客弄好都挺久了，都没有一篇文章也挺不好意思的，今天用自己的烂文笔献丑了。  工作方面 2017年一直都在微叮科技公司，自从2016年开始开始使用vue技术栈，2017也是一直继续加强使用vue。并且实现了所有项目的前后端分离，这很有意思，在我看来这是前端崛起的一个里程碑">
+<meta name="twitter:title" content="前端与appNative的交互 jsbridge">
+<meta name="twitter:description" content="背景 目前前端实现app的方式有很多，facebook的react Native 、阿里的weex(vue),但是相比原生还是存在很多问题，比如加载速度、调硬件设备、体验等方面。于是就有了中庸的一种实现方式 混合开发，用原生的壳内嵌H5页面，最近公司就有了这样一个项目，把之前写的公众号的项目内嵌进app。并且要保留之前的微信支付，添加直接拨打电话、分享朋友圈等功能，这就需要前端调用原生的方法，同时">
   
     <link rel="alternative" href="/atom.xml" title="On The Road" type="application/atom+xml">
   
@@ -158,39 +158,146 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-Jsbridge" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      2017年的总结
+      前端与appNative的交互 jsbridge
     </h1>
   
 
         
-        <a href="/tags/anyTime-note.html" class="archive-article-date">
-  	<time datetime="2019-08-27T14:30:26.341Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
+        <a href="/2018/04/18/Jsbridge/" class="archive-article-date">
+  	<time datetime="2018-04-18T13:02:11.170Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="给自己一点信心"><a href="#给自己一点信心" class="headerlink" title="给自己一点信心"></a>给自己一点信心</h3><blockquote>
-<p>一直在回想自己2017年所经历的一些事，准备写一个年终总结，但文笔有限，一直没有想好怎么写，一拖就拖到了现在，但博客弄好都挺久了，都没有一篇文章也挺不好意思的，今天用自己的烂文笔献丑了。</p>
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><blockquote>
+<p>目前前端实现app的方式有很多，facebook的react Native 、阿里的weex(vue),但是相比原生还是存在很多问题，比如加载速度、调硬件设备、体验等方面。于是就有了中庸的一种实现方式 混合开发，用原生的壳内嵌H5页面，最近公司就有了这样一个项目，把之前写的公众号的项目内嵌进app。并且要保留之前的微信支付，添加直接拨打电话、分享朋友圈等功能，这就需要前端调用原生的方法，同时原生也会调用前端的方法。本文的重点就来了”jsbridge”，它就相当于前端与原生的一个中间连接桥。</p>
 </blockquote>
-<h3 id="工作方面"><a href="#工作方面" class="headerlink" title="工作方面"></a>工作方面</h3><blockquote>
-<p>2017年一直都在微叮科技公司，自从2016年开始开始使用vue技术栈，2017也是一直继续加强使用vue。并且实现了所有项目的前后端分离，这很有意思，在我看来这是前端崛起的一个里程碑。我能算也是勉强赶上了技术潮流，整个公司的系统都是使用vue + iview实现整个前端的展示页面和交互，唯一小瑕疵的是没有使用上vue-route 和 vux，路由有后端控制，整个项目因为庞大也没有采取单页面应用的开发，而是采取了比较保守做法，事实证明这也是对的，项目庞大、权限复杂，前端实现的话是比较蛋疼的，而且体验也不会太好。<br> 公司项目比较多，但2017年我做的工作如下，安阳项目（微信公众页面，只兼容微信内置浏览器） 、分销项目（分销系统，几乎大部分时间都在开发整个）、管理项目（在公司的试用项目经理阶段管理了一个月），这么统计下来所做的东西也不多。对vue框架的使用也是越来越娴熟，也真正的了解到了mvvm框架的好处，组件式的开发、数据驱动页面。同时对前端的工程化也有了一定的了解，webpack不敢说精通，但也能熟练的搭建起整个框架。</p>
+<h3 id="jsbridge-实现方式"><a href="#jsbridge-实现方式" class="headerlink" title="jsbridge 实现方式"></a>jsbridge 实现方式</h3><blockquote>
+<h4 id="目前主要有三种实现方式，-js的WebViewJavascriptBridge方法、api注入、URL-SCHEME。"><a href="#目前主要有三种实现方式，-js的WebViewJavascriptBridge方法、api注入、URL-SCHEME。" class="headerlink" title="目前主要有三种实现方式， js的WebViewJavascriptBridge方法、api注入、URL SCHEME。"></a>目前主要有三种实现方式， js的WebViewJavascriptBridge方法、api注入、URL SCHEME。</h4><p>1.WebViewJavascriptBridge</p>
 </blockquote>
-<h3 id="成长方面"><a href="#成长方面" class="headerlink" title="成长方面"></a>成长方面</h3><blockquote>
-<p>2017年始给自己定的一系列目标，到目前为止还是很尴尬的，原生js跨步不大，一直在计划内的后端语言也没有大的进展，node.js、python没有深入的学习，Vue方面使倒是有了很大的进步。回看第一个vue项目简直没法入眼。总的来说成长缓慢，技术恐慌严重。</p>
-</blockquote>
-<h3 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h3><blockquote>
-<p>未来的当前路就是2018，2018坚持完全掌握一门后台语言（能完成项目），前端工程化的加强（独立配置、新的工具掌握如Parcel等）、原生js的代码的整洁与优雅（代码之道）、培养自己的第二技能（经济、写作、管理等）。</p>
-</blockquote>
+<p> 原生引入WebViewJavascriptBridge的库，前端代码主要如下</p>
+<pre><code>//注册事件监听，初始化
+const setupWebViewJavascriptBridge = (callback) =&gt; {
+  let userAgent = navigator.userAgent
+  let isAndroid = userAgent.indexOf(&apos;Android&apos;) &gt; -1 || userAgent.indexOf(&apos;Adr&apos;) &gt; -1
+  let isIOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
 
+  // Android使用
+  if (isAndroid) {
+    if (window.WebViewJavascriptBridge) {
+      // eslint-disable-next-line
+      callback(WebViewJavascriptBridge)
+    } else {
+      document.addEventListener(
+        &apos;WebViewJavascriptBridgeReady&apos;,
+        function () {
+          // eslint-disable-next-line
+          callback(WebViewJavascriptBridge)
+        },
+        false
+      )
+    }
+  }
+
+  // iOS使用
+  if (isIOS) {
+    if (window.WebViewJavascriptBridge) {
+      // eslint-disable-next-line
+      return callback(WebViewJavascriptBridge)
+    }
+    if (window.WVJBCallbacks) {
+      return window.WVJBCallbacks.push(callback)
+    }
+    window.WVJBCallbacks = [callback]
+    var WVJBIframe = document.createElement(&apos;iframe&apos;)
+    WVJBIframe.style.display = &apos;none&apos;
+    WVJBIframe.src = &apos;https://__bridge_loaded__&apos;
+    document.documentElement.appendChild(WVJBIframe)
+    setTimeout(function () {
+      document.documentElement.removeChild(WVJBIframe)
+    }, 0)
+  }
+}
+// 分享
+export const share = (platform, url, title) =&gt; {
+  setupWebViewJavascriptBridge((bridge) =&gt; {
+
+      //window.WebViewJavascriptBridge
+
+    bridge.callHandler(&apos;appBridgeShareToWechat&apos;, JSON.stringify({platform: platform, url: url, title: title}), (response) =&gt; {
+      // let repObj = JSON.parse(response)
+      // if (repObj.success) {
+      //   tips(&apos;分享成功&apos;, 1000)
+      // }
+    })
+  })
+}
+</code></pre><a id="more"></a>
+<pre><code>js传递数据
+var data = &apos;发送数据给java默认接收&apos;;
+   window.WebViewJavascriptBridge.send(
+       data
+       , function(responseData) { //处理java回传的数据
+      document.getElementById(&quot;show&quot;).innerHTML = responseData;
+       }
+   );
+</code></pre><blockquote>
+<p>2.注入api<br>此方法对前端的调用比较简单，只需要原生把方法注入到js的上下文中，前端直接调用，如下</p>
+</blockquote>
+<pre><code>ios:
+JSContext *context = [uiWebView valueForKeyPath:@&quot;documentView.webView.mainFrame.javaScriptContext&quot;];
+    context[@&quot;postBridgeMessage&quot;] = ^(NSArray&lt;NSArray *&gt; *calls) {
+    // Native 逻辑
+};
+
+js:
+window.postBridgeMessage(message); 
+WKWebView window.webkit.messageHandlers.nativeBridge.postMessage(message);
+
+android:
+public class JavaScriptInterfaceDemoActivity extends Activity {
+    private WebView Wv;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Wv = (WebView)findViewById(R.id.webView);
+        final JavaScriptInterface myJavaScriptInterface = new JavaScriptInterface(this);
+        Wv.getSettings().setJavaScriptEnabled(true);
+        Wv.addJavascriptInterface(myJavaScriptInterface, &quot;nativeBridge&quot;);
+        // TODO 显示 WebView
+    }
+    public class JavaScriptInterface {
+         Context mContext;
+         JavaScriptInterface(Context c) {
+             mContext = c;
+         }
+         public void postMessage(String webMessage){
+             // Native 逻辑
+         }
+     }
+}
+
+js:
+
+window.nativeBridge.postMessage(message);
+</code></pre><blockquote>
+<p>3.URL SCHEME<br>先解释一下 URL SCHEME：URL SCHEME是一种类似于url的链接，是为了方便app直接互相调用设计的，形式和普通的 url 近似，主要区别是 protocol 和 host 一般是自定义的，例如: qunarhy://hy/url?url=<a href="http://ymfe.tech，protocol" target="_blank" rel="external">http://ymfe.tech，protocol</a> 是 qunarhy，host 则是 hy。</p>
+<p>拦截 URL SCHEME 的主要流程是：Web 端通过某种方式（例如 iframe.src）发送 URL Scheme 请求，之后 Native 拦截到请求并根据 URL SCHEME（包括所带的参数）进行相关操作。</p>
+<p>在时间过程中，这种方式有一定的 缺陷：</p>
+<p>使用 iframe.src 发送 URL SCHEME 会有 url 长度的隐患。<br>创建请求，需要一定的耗时，比注入 API 的方式调用同样的功能，耗时会较长。<br>但是之前为什么很多方案使用这种方式呢？因为它 支持 iOS6。而现在的大环境下，iOS6 占比很小，基本上可以忽略，所以并不推荐为了 iOS6 使用这种 并不优雅 的方式。</p>
+<p>【注】：有些方案为了规避 url 长度隐患的缺陷，在 iOS 上采用了使用 Ajax 发送同域请求的方式，并将参数放到 head 或 body 里。这样，虽然规避了 url 长度的隐患，但是 WKWebView<br>并不支持这样的方式。</p>
+<p>【注2】：为什么选择 iframe.src 不选择 locaiton.href ？因为如果通过 location.href 连续调用 Native，很容易丢失一些调用。</p>
+</blockquote>
+<h3 id="参考资料-ymfe-参考资料-zhifu"><a href="#参考资料-ymfe-参考资料-zhifu" class="headerlink" title="参考资料 ymfe 参考资料 zhifu "></a><a href="https://blog.ymfe.org/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84JSBridge/" target="_blank" rel="external">参考资料 ymfe</a> <a href="https://zhuanlan.zhihu.com/p/35200622" target="_blank" rel="external">参考资料 zhifu </a></h3>
       
 
       
@@ -248,7 +355,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/tags/anyTime-note.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/18/Jsbridge/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -260,6 +367,25 @@
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/2018/04/18/2017conclusion/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2017年的总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/04/first/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue复杂组件的思考</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -310,7 +436,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
